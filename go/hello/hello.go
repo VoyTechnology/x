@@ -1,7 +1,10 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"voytechnology/x/go/pkg/helloworld"
+)
 
 func main() {
-	fmt.Println("hello world")
+	fmt.Println(helloworld.Hello("world"))
 }
