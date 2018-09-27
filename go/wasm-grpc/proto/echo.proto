@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package proto;
+
+service EchoService{
+    rpc Ping( Message ) returns ( Message );
+}
+
+message Message {
+    int64 time = 1;
+}

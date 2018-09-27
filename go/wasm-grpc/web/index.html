@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="wasm_exec.js"></script>
+    <script>
+        const go = new Go();
+        const mod = init("client.wasm", go.importObject);
+
+        async function ping() {
+            mod.then((inst) => {
+                go.run(inst);
+            });
+        }
+
+        async function init(url, importObject) {
+            return fetch(url)
+                .then((res) => {
+                    return res.arrayBuffer();
+                })
+                .then((bytes) => {
+                    return WebAssembly.instantiate(bytes, importObject);
+                })
+                .then((res) => {
+                    return res.instance
+                });
+        }
+
+    </script>
+</head>
+
+<body>
+    <button onclick="ping()">Ping</button>
+</body>
+
+</html>

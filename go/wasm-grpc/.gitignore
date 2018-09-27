@@ -1,0 +1,3 @@
+*.wasm
+*.pb.go
+*.js
