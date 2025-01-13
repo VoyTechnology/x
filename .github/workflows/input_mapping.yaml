@@ -2,8 +2,10 @@ name: Map Inputs based on other inputs
 
 env:
   mappings: |
-    foo: bar
-    baz: qux
+    {
+      "foo": "bar",
+      "baz": "qux"
+    }
 
 on:
   workflow_dispatch:
@@ -21,5 +23,5 @@ jobs:
     steps:
       - name: Map Inputs
         run: |
-          echo "mapping ${{ github.event.inputs.name }} -> ${{ env.mappings.${{ github.event.inputs.name }} }}"
+          echo "mapping ${{ github.event.inputs.name }} -> ${{ fromJson(env.mappings)[${{ github.event.inputs.name }}] }}"
           
