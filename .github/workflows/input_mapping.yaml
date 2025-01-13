@@ -1,0 +1,25 @@
+name: Map Inputs based on other inputs
+
+env:
+  mappings: |
+    foo: bar
+    baz: qux
+
+on:
+  workflow_dispatch:
+    inputs:
+      name:
+        description: 'Name of the person'
+        type: choice
+        options:
+          - foo
+          - baz
+
+jobs:
+  map:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Map Inputs
+        run: |
+          echo "mapping ${{ github.event.inputs.name }} -> ${{ env.mappings.${{ github.event.inputs.name }} }}"
+          
